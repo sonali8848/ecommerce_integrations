@@ -57,6 +57,11 @@ class UnicommerceAPIClient:
 			response = requests.request(
 				url=url, method=method, headers=headers, json=body, params=params, files=files
 			)
+			frappe.logger('unicommerce').exception(url)
+			frappe.logger('unicommerce').exception(headers)
+			frappe.logger('unicommerce').exception(body)
+			frappe.logger('unicommerce').exception(response.json())
+			frappe.logger('unicommerce').exception(response.text)
 			# unicommerce gives useful info in response text, show it in error logs
 			response.reason = cstr(response.reason) + cstr(response.text)
 			response.raise_for_status()
