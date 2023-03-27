@@ -50,7 +50,7 @@ def update_inventory_on_unicommerce(client=None, force=False):
 	inventory_synced_on = now()
 
 	for warehouse in warehouses:
-		if warehouse.shelf:
+		if warehouse['shelf']:
 			return shelf_bulk_update(warehouse,settings)
 		warehouse = warehouse.erpnext_warehouse
 		is_group_warehouse = cint(frappe.db.get_value("Warehouse", warehouse, "is_group"))
@@ -93,6 +93,7 @@ def _update_inventory_sync_status(ecom_item_success_map: Dict[str, bool], timest
 
 
 def shelf_bulk_update(warehouse,settings):
+	warehouse = warehouse['erpnext_warehouse']
 	shelves = frappe.get_list('Shelf',{'warehouse':warehouse,'disable':0},['shelf_name','type'])
 	is_group_warehouse = cint(frappe.db.get_value("Warehouse", warehouse, "is_group"))
 	if is_group_warehouse:
