@@ -121,7 +121,7 @@ def shelf_bulk_update(warehouse,settings):
 				"from_date":datetime.today().strftime("%Y-%m-%d"),
 				"to_date":datetime.today().strftime("%Y-%m-%d"),
 				"warehouse":warehouse,
-				"shelf": shelf,
+				"shelf": shelf.shelf_name,
 				"item_code": item.item_code
 				}
 			columns, data = report.get_data(
